@@ -1,0 +1,74 @@
+body {
+    background-color: grey;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr 40px 150px 120px 100px;
+}
+
+header {
+    background-color: darkgreen;
+        text-align: center;
+}
+
+#alienShips {
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    width: inherit;
+}
+
+.alienShip {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.alienShipPicture {
+    height: 25%;
+}
+
+#buttonDiv {
+    background-color: rgb(154, 162, 67);
+    text-align: center;
+}
+
+button {
+    border: 0px;
+    background-color: rgb(120, 120, 120);
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    font-size: 17px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: inline;
+}
+
+button:hover {
+    height: 35px;
+    background-color: rgb(95, 95, 95);
+    margin-top: 2.5px;
+}
+
+#playerShipDiv {
+    background-color: darkblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#playerShipPicture {
+    padding-left: 15px;
+    height: 70%;
+}
+
+#playerData {
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+footer {
+    background-color: rgb(5, 140, 28);
+    text-align: center;
+}
