@@ -13,14 +13,14 @@ header {
         text-align: center;
 }
 
-#alienShips {
+#alienShipsContainer {
     background-color: blueviolet;
     display: flex;
     justify-content: center;
     width: inherit;
 }
 
-.alienShip {
+.alienDiv {
     margin-left: 5px;
     margin-right: 5px;
 }
