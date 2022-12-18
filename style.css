@@ -5,16 +5,21 @@ body {
     margin: 0px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 80px 1fr 40px 150px 120px 100px;
+    grid-template-rows: 80px 1fr 40px 150px 120px 60px;
+    font-family: monospace;
+    box-sizing: border-box;
 }
 
 header {
-    background-color: darkgreen;
-        text-align: center;
+    background-color: rgb(168, 6, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
 #alienShipsContainer {
-    background-color: blueviolet;
+    background-color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     width: inherit;
@@ -23,6 +28,13 @@ header {
 .alienDiv {
     margin-left: 5px;
     margin-right: 5px;
+    margin-top: 10px;
+    color: white;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 
 .alienShipPicture {
@@ -30,7 +42,7 @@ header {
 }
 
 #buttonDiv {
-    background-color: rgb(154, 162, 67);
+    background-color: rgb(0, 0, 0);
     text-align: center;
 }
 
@@ -52,23 +64,33 @@ button:hover {
 }
 
 #playerShipDiv {
-    background-color: darkblue;
+    background-color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #playerShipPicture {
-    padding-left: 15px;
+    padding-left: 13px;
     height: 70%;
 }
 
 #playerData {
-    background-color: antiquewhite;
-    text-align: center;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#playerData > h2{
+    margin: 0;
 }
 
 footer {
-    background-color: rgb(5, 140, 28);
+    background-color: rgb(18, 18, 113);
     text-align: center;
+    color: rgb(255, 255, 156);
 }
