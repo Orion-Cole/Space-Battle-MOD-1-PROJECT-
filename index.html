@@ -10,6 +10,18 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="pop-up-container">
+        <div id="pop-up">
+            <form>
+                <label for="selectShip">Which ship do you want to attack?</label><br>
+                <input type="text" id="selectShip" name="selectShip" value=""><br>
+                <label for="selectWeapon">Do want to use a rocket?</label><br>
+                <input type="checkbox" id="selectWeapon" name="selectWeapon" value="useRocket"><br>
+                <input type="button" id="submitButton" name="submitButton" value="ENTER">
+            </form>
+        </div>
+    </div>
+
     <header>
         <h1>Space Battle!</h1>
     </header>
@@ -23,7 +35,9 @@
     </div>
 
     <div id="playerShipDiv">
+        <div id="currentPointsDiv"><h2>POINTS:<span id="currentPoints">0</span></h2></div>
         <img id="playerShipPicture" src="galaga-fighter.png" alt="playerShipPicture">
+        <div id="currentRoundDiv"><h2>ROUND:<span id="currentRound">1</span></h2></div>
     </div>
 
     <div id="playerData">

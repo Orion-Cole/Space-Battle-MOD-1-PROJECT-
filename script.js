@@ -1,32 +1,54 @@
 document.getElementById('startGameButton').addEventListener('click', () => { //listens for click of start button
     document.getElementById('startGameButton').style.display = 'none'; //hide start button
-    setTimeout(() => {startGame();}, 1000); //delay of 1 second so button has time to vanish
+    startGame(); //starts game
 });
 
+let currentRound = 1; //sets default round
+let currentPoints = 0; //sets default points
 
+const endGame = (text, hullFromLastRound) => { //Handles game ends and round ends
 
-const endGame = (text) => { //ENDS THE GAME
-    //console.log('Game Over ' + text);
-    let winner;
-    text == 'player win'? winner = 'You won!' : winner = 'You Lose!';
-    let userInput = window.prompt(`Game Over! ${winner} would you like to play again?`);
-    if (userInput == 'yes') {
-        //console.log('replay game');
-        document.getElementById('shipHull').textContent = 20; //resets user hull in html
-        setTimeout(() => {startGame()}, 1000);
-    } else {
-        console.log('quit game')
-        location.reload();
+    if (text == 'player lose') {
+        let userInputLost = window.prompt(`Game Over! You Lose! would you like to play again?`);
+        if (userInputLost == 'yes') {
+            document.getElementById('shipHull').textContent = 20; //resets user hull in html
+            currentRound = 1;
+            setTimeout(() => {startGame()}, 2000);
+        } else {
+            console.log('quit game')
+            location.reload();
+        }
+    } else { //if players won the round
+        if (currentRound == 3) { //and if on the final round
+            let userInputWon = window.prompt(`Game Over! You Win! would you like to play again?`);
+            if (userInputWon == 'yes') {
+                document.getElementById('shipHull').textContent = 20; //resets user hull in html
+                currentRound = 1;
+                setTimeout(() => {startGame()}, 2000);
+            } else {
+                console.log('quit game')
+                location.reload();
+            }
+        } else { //round won but not yet on final round-continue to next round
+            currentRound++
+            console.log('advance to next round');
+            setTimeout(() => {startGame(hullFromLastRound)}, 1000);
+        }
     }
 }
 
 
-const startGame = () => {
+//---------------------------------------------GAME START/ROUND START
+const startGame = (hullFromLastRound) => {
 
-const playerShip = { //PLAYER SHIP OBJECT
+console.log(currentRound);
+document.getElementById('currentRound').textContent = currentRound; //update currentRound dom counter
+
+let playerShip = { //PLAYER SHIP OBJECT
     hull:20,
     firePower:5,
     accuracy:.7,
+    missiles:3,
     attack(enemyHull) { //attack enemy method
         if(Math.random() <= this.accuracy) {
             return enemyHull - this.firePower;
@@ -35,7 +57,18 @@ const playerShip = { //PLAYER SHIP OBJECT
         }
     }
 }
+if (hullFromLastRound != undefined) { //if not a new game, import the hull data from last round
+    playerShip.hull = hullFromLastRound;
+    console.log('player hull set to hullFromLastRound');
+}
 
+if (currentRound == 1) { //reset points at game start
+    console.log('RESET POINTS');
+    currentPoints = 0;
+    document.getElementById('currentPoints').textContent = currentPoints;
+} else {
+    console.log("DON'T RESET POINTS");
+}
 
 class AlienShip { 
     constructor(number) { //ALIEN SHIP PROPERTIES
@@ -95,17 +128,15 @@ class AlienShipFactory {
     }
 }
 
-const alienShipFactory = new AlienShipFactory(); //make alien ship factory
+let alienShipFactory = new AlienShipFactory(); //make alien ship factory
 
 alienShipFactory.alienShipArray = []; //reset array
 document.getElementById('alienShipsContainer').innerHTML = "";//resets alienShip divs
 
-
-const numberOfShips = 6; //determine how many ships to make
+let numberOfShips = Math.floor(Math.random()*(6 - 4 + 1))+4; //determine how many ships to make(random amount in a range)
 for (let i=1; i<=numberOfShips; i++) { //also give ships number id
     alienShipFactory.createShip(i);
 }
-
 
 
 const updateAlienHullCounter = (ship) => { //function to update an aliens ship hull display when called
@@ -114,49 +145,51 @@ const updateAlienHullCounter = (ship) => { //function to update an aliens ship h
     document.getElementById(id).innerHTML = `Hull: ${currentHull}`;
 }
 
-
-
-//BATTLE LOOP
+//BATTLE
 
 const battle = (alien) => {
-//console.log(`Players hull: ${playerShip.hull}`);
+console.log('battle function starting');
 
-
-        while(alien.hull > 0) {
-            alien.hull = playerShip.attack(alien.hull); //PLAYER ATTACKS
-                updateAlienHullCounter(alien);
-            
-            if(alien.hull <= 0) {
-                alien.destroyed = true;
-                //console.log(alien.id + ' destroyed');
-                if (alienShipFactory.alienShipArray.every((ship) => {if (ship.destroyed == true) {return true}})) {
-                    setTimeout(() => {endGame('player win')},1000);
-                    //console.log('PLAYER WIN CONDITION MET');
-                } else {
-                    setTimeout(() => {chooseTarget()},1000);
-                    //console.log('choose new target');
-                }
+    while(alien.hull > 0) {
+        alien.hull = playerShip.attack(alien.hull); //PLAYER ATTACKS
+            updateAlienHullCounter(alien);
+            console.log('player attacks!');
+        if(alien.hull <= 0) {
+            alien.destroyed = true;
+            currentPoints += 5; //add points for every kill
+            document.getElementById('currentPoints').textContent = currentPoints; //update point counter in dom
+            console.log('cuurent points:' + currentPoints);
+            console.log(alien.id + ' destroyed');
+            if (alienShipFactory.alienShipArray.every((ship) => {if (ship.destroyed == true) {return true}})) {
+                setTimeout(() => {endGame('player win', playerShip.hull)},1000);
+                console.log('PLAYER WIN CONDITION MET');
             } else {
-                playerShip.hull = alien.attack(playerShip.hull); //ALIEN ATTACKS
-                //console.log(`The alien attacks! Hull at: ${playerShip.hull}`);
-                document.getElementById('shipHull').textContent = playerShip.hull;
-                if(playerShip.hull <= 0) {
-                    setTimeout(() => {endGame('player lose')}, 1000); //delay so ship hull value may update
-                }
+                setTimeout(() => {chooseTarget()},1000);
+                console.log('choose new target');
             }
-    
-            
+        } else {
+            playerShip.hull = alien.attack(playerShip.hull); //ALIEN ATTACKS
+            console.log(`The alien attacks! Hull at: ${playerShip.hull}`);
+            document.getElementById('shipHull').textContent = playerShip.hull;
+            if(playerShip.hull <= 0) {
+                console.log('player hull is now <= 0, player lose condition met');
+                setTimeout(() => {endGame('player lose')}, 1000); //delay so ship hull value may update
+                break;
+            }
         }
+    }
 }
 
 
-
 const chooseTarget = () => { //gets user input on what to target then calls battle loop
+    console.log('choose target function starting');
     let targetShipId = window.prompt('Which ship do you want to attack?');
     let targetShip = alienShipFactory.alienShipArray[targetShipId-1];
     if (targetShip.destroyed == false) {
+        console.log('targetShip.destroyed == false');
         battle(targetShip);
     } else {
+        console.log('targetShip.destroyed == true');
         targetShipId = window.prompt('Ship already destroyed. Which ship do you want to attack?');
         targetShip = alienShipFactory.alienShipArray[targetShipId-1];
         battle(targetShip);
