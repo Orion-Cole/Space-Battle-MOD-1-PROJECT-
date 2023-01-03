@@ -173,6 +173,7 @@ header {
         justify-content: center;
         align-items: center;
         gap: 4px;
+        box-shadow: inset 0px -6px 20px rgb(6, 6, 6);
     }
 
         #playerData > h2{
@@ -212,6 +213,7 @@ footer {
     text-align: center;
     color: rgb(255, 255, 156);
     font-size: 10px;
+    box-shadow: inset 0px -6px 20px rgb(18, 18, 62);
 }
 
 #bossGuns {

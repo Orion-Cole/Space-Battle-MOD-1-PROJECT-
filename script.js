@@ -190,6 +190,7 @@ class AlienShipFactory {
         alienDiv.setAttribute('display', 'flex');
 
         let image = document.createElement('img'); //mk img
+        image.setAttribute('id', 'image' + number)
         image.src = 'galaga-bee.png';
         image.alt = 'alien ship';
         image.classList.add('alienShipPicture');
@@ -292,11 +293,14 @@ if (currentRound == 4) {
 
 const updateAlienHullCounter = (ship) => { //function to update an aliens ship hull display when called
     let id = ship.id
-    if (id == 'Mother Ship') {
-        id = 'alienMotherShipHull';
-    }
     let currentHull = ship.hull;
-    document.getElementById(id).innerHTML = `Hull: ${currentHull}`;
+    if (id == 'Mother Ship') {
+        //id = 'alienMotherShipHull';
+        document.getElementById('alienMotherShipHull').innerHTML = `Hull: ${currentHull}`;
+    } else {
+        document.getElementById(id).innerHTML = `Hull: ${currentHull}`;
+        document.getElementById('image' + id).style.opacity = '.5'; //fade image of destroyed ships
+    }
 }
 
 //BATTLE function
