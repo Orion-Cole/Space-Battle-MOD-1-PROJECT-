@@ -6,6 +6,12 @@ audio {
 
 body {
     background-color: rgb(0, 0, 0);
+        background-image: url(./pixel_stars.png);
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+        background-position: center;
+        background-size: contain;
     height: 100vh;
     width: 100vw;
     margin: 0px;
@@ -42,8 +48,15 @@ body {
         .pop-up {
             display: flex;
             justify-content: center;
-            align-items: start;
+            align-items: center;
             background-color: rgb(120, 120, 120);
+            background-image: url(./pixel_metal_plate1.png);
+                background-repeat: no-repeat;
+                image-rendering: pixelated;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: crisp-edges;
+                background-position: center;
+                background-size: cover;
             width: 100%;
             height: 100%;
             border-radius: 25px 25px 25px 25px;
@@ -59,6 +72,14 @@ body {
                     height: 30px;
                     width: 40px;
                     outline: none;
+                    border: 3px solid rgb(110, 110, 110);
+                }
+
+                #selctGun {
+                    height: 30px;
+                    width: 40px;
+                    outline: none;
+                    border: 3px solid rgb(110, 110, 110);
                 }
 
                 #useMissiles {
@@ -75,6 +96,8 @@ body {
                     height: 30px;
                     width: 80px;
                     font-family: Joystix;
+                    border-radius: 25px 25px 25px 25px;
+                    box-shadow: 0px 2px rgb(28, 28, 28), 0px 4px 5px rgb(28, 28, 28);
                 }
 
 header {
@@ -87,7 +110,7 @@ header {
 }
 
 #alienShipsContainer {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0);
     display: flex;
     justify-content: center;
     width: inherit;
@@ -129,6 +152,13 @@ header {
     button {
         border: 0px;
         background-color: rgb(120, 120, 120);
+        background-image: url(./pixel_metal_plate1.png);
+            background-repeat: no-repeat;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            background-position: bottom;
+            background-size: 350%;
         height: 50px;
         width: 100px;
         text-align: center;
@@ -141,8 +171,6 @@ header {
         -webkit-text-stroke-width: .2px;
         -webkit-text-stroke-color: rgb(28, 28, 28);
         border-radius: 25px 25px 22px 22px;
-        /* border: 1px dotted rgb(12, 12, 12);
-        border-bottom: none; */
     }
 
         button:hover {
@@ -154,7 +182,7 @@ header {
         }
 
 #playerShipDiv {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,7 +194,8 @@ header {
     }
 
     #playerData {
-        background-color: rgb(15, 15, 15);
+        background-image: linear-gradient(rgb(15, 15, 15, .5), rgb(15, 15, 15, .9));
+        /* background-color: rgb(15, 15, 15, .9); */
         color: white;
         display: flex;
         flex-direction: column;
@@ -209,7 +238,7 @@ header {
 }
 
 footer {
-    background-color: rgb(18, 18, 113);
+    background-color: rgb(18, 18, 113, .9);
     text-align: center;
     color: rgb(255, 255, 156);
     font-size: 10px;
