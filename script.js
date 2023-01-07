@@ -2,6 +2,8 @@ document.getElementById('startGameButton').addEventListener('click', () => { //l
     document.getElementById('startGameButton').style.display = 'none'; //hide start button
     var theme = document.getElementById('theme');
     theme.play();
+    document.getElementById('prepareDiv').style.display = 'block';
+    setTimeout(() => {document.getElementById('prepareDiv').style.display = 'none';}, 4000)
     setTimeout(() => {startGame()}, 4000); //starts game
 });
 
